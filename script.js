@@ -131,10 +131,10 @@ function generateKey() {
         
         generatedKeys.add(key);
         // Notify Discord bot (replace URL with your actual webhook endpoint)
-        fetch('http://127.0.0.1:5000/notify_key', {
+        fetch('https://discord.com/api/webhooks/1441486535311753438/rk_Z6PfDjIK3FqG8BVLY53Ig8fWGUi2pYRBYAHWZhYyoUc855BnadulK-q-uhZcS0xhP', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key })
+            body: JSON.stringify({ content: `A player created a free key: ${key}` })
         });
         
         // Animate the key display
