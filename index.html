@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        #container { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 350px; }
+        button { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; }
+        .hidden { display: none; }
+        .step { margin-bottom: 1.5rem; }
+        #key { font-weight: bold; color: #2d7a2d; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="step1" class="step">
+            <h2>Key Generator</h2>
+            <button onclick="nextStep(2)">Generate My Key</button>
+        </div>
+        <div id="step2" class="step hidden">
+            <p>Wait! Before we generate, <a href="https://www.youtube.com/@DevMivvy" target="_blank">subscribe to this YouTube channel</a>.</p>
+            <button onclick="nextStep(3)">I Subscribed</button>
+        </div>
+        <div id="step3" class="step hidden">
+            <p>Wait 5 seconds...</p>
+            <button id="continue3" class="hidden" onclick="nextStep(4)">Continue</button>
+        </div>
+        <div id="step4" class="step hidden">
+            <p>Are you human?</p>
+            <input type="checkbox" id="humanCheck"> <label for="humanCheck">I'm not a robot</label><br>
+            <button id="continue4" onclick="verifyHuman()">Continue</button>
+        </div>
+        <div id="step5" class="step hidden">
+            <p>Wait 5 seconds...</p>
+            <button id="continue5" class="hidden" onclick="nextStep(6)">Continue</button>
+        </div>
+        <div id="step6" class="step hidden">
+            <p>Wait! Before we give you a key, <a href="https://discord.gg/JUGQCe22jb" target="_blank">join this Discord</a>.</p>
+            <button onclick="nextStep(7)">I Joined</button>
+        </div>
+        <div id="step7" class="step hidden">
+            <p>Your unique key:</p>
+            <div id="key"></div>
+            <p>Active for 5 hours.</p>
+        </div>
+    </div>
+    <script>
+        let generatedKeys = new Set();
+        function nextStep(step) {
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById('step' + i).classList.add('hidden');
+            }
+            document.getElementById('step' + step).classList.remove('hidden');
+            if (step === 3) {
+                setTimeout(() => {
+                    document.getElementById('continue3').classList.remove('hidden');
+                }, 5000);
+            }
+            if (step === 5) {
+                setTimeout(() => {
+                    document.getElementById('continue5').classList.remove('hidden');
+                }, 5000);
+            }
+            if (step === 7) {
+                generateKey();
+            }
+        }
+        function verifyHuman() {
+            if (document.getElementById('humanCheck').checked) {
+                nextStep(5);
+            } else {
+                alert('Please confirm you are human.');
+            }
+        }
+        function generateKey() {
+            let key;
+            do {
+                key = 'KEY-' + Math.random().toString(36).substr(2, 10).toUpperCase();
+            } while (generatedKeys.has(key));
+            generatedKeys.add(key);
+            document.getElementById('key').textContent = key;
+            setTimeout(() => {
+                generatedKeys.delete(key);
+            }, 5 * 60 * 60 * 1000); // 5 hours
+        }
+    </script>
+</body>
+</html>
