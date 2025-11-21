@@ -2,13 +2,27 @@
 :root {
     --primary: #6c5ce7;
     --primary-dark: #5649c0;
-    --secondary: #a29bfe;
+    --primary-light: #a29bfe;
+    --secondary: #00b894;
+    --secondary-dark: #00a884;
+    --accent: #ff7675;
     --text: #2d3436;
+    --text-light: #f8f9fa;
+    --text-muted: #b2bec3;
+    --dark: #1e1e2f;
+    --darker: #161622;
     --light: #f8f9fa;
-    --dark: #343a40;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
     --success: #00b894;
+    --warning: #fdcb6e;
     --danger: #d63031;
+    --info: #0984e3;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     --transition: all 0.3s ease;
+    --gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    --gradient-hover: linear-gradient(135deg, #5d4fcf 0%, #8f88e6 100%);
 }
 
 * {
@@ -17,13 +31,22 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #2a2a3a);
-    color: var(--light);
+    background: var(--darker);
+    color: var(--text-light);
     line-height: 1.6;
     min-height: 100vh;
     padding: 2rem 1rem;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 184, 148, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 118, 117, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
 }
 
 .container {
@@ -32,18 +55,47 @@ body {
     padding: 0 1rem;
 }
 
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
 /* Glitch Effect */
 .glitch {
     position: relative;
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 800;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: #fff;
     text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff, 0.025em 0.04em 0 #fffc00;
     animation: glitch 725ms infinite;
+    position: relative;
+    display: inline-block;
 }
 
 @keyframes glitch {
@@ -56,29 +108,64 @@ body {
     100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em 0 0 #fc00ff, -0.025em 0 0 #fffc00; }
 }
 
-/* Sections */
-section {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 2rem;
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    text-align: center;
     margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 400;
+}
+
+/* Sections */
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient);
+    border-radius: 2px;
+}
+
+section {
+    background: rgba(30, 30, 47, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transform: translateY(0);
 }
 
 section:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border-color: rgba(108, 92, 231, 0.3);
 }
 
 /* Buttons */
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     background: var(--primary);
     color: white;
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 0.9rem 2rem;
     border-radius: 50px;
     font-size: 1rem;
     font-weight: 600;
@@ -89,6 +176,9 @@ section:hover {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    min-width: 160px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
 }
 
 .btn:before {
@@ -98,13 +188,13 @@ section:hover {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: all 0.6s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
     z-index: -1;
 }
 
 .btn:hover:before {
-    left: 0;
+    left: 100%;
 }
 
 .btn:hover {

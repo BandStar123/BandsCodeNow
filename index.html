@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -16,53 +17,207 @@
             <p class="subtitle">Unlock the power of premium coding tools</p>
         </section>
 
-        <!-- Premium Section -->
-        <section class="premium-section">
-            <div class="pricing-card">
-                <div class="pricing-header">
-                    <h2>Premium Access</h2>
-                    <div class="price">$9.99<span>/month</span></div>
+        <!-- Subscription Tiers -->
+        <section class="pricing-section">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <div class="pricing-cards">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Free</h3>
+                        <div class="price">$0<span>/month</span></div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Basic access to tools</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li><i class="fas fa-check"></i> Limited features</li>
+                        <li class="disabled"><i class="fas fa-times"></i> No API access</li>
+                    </ul>
+                    <button class="btn btn-outline" data-plan="free">Get Started</button>
                 </div>
-                <ul class="features">
-                    <li><i class="fas fa-check"></i> Access to all premium tools</li>
-                    <li><i class="fas fa-check"></i> Priority support</li>
-                    <li><i class="fas fa-check"></i> Exclusive content</li>
-                    <li><i class="fas fa-check"></i> Regular updates</li>
-                </ul>
-                <button class="btn btn-premium">Get Premium</button>
+
+                <!-- Premium Tier -->
+                <div class="pricing-card featured">
+                    <div class="popular-tag">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Premium</h3>
+                        <div class="price">$14.99<span>/month</span></div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Full access to all tools</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                        <li><i class="fas fa-check"></i> Regular updates</li>
+                    </ul>
+                    <button class="btn btn-premium" data-plan="premium">Get Premium</button>
+                </div>
+
+                <!-- Full Time Key Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Full Time Key</h3>
+                        <div class="price">$99<span>/year</span></div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> All Premium features</li>
+                        <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+                        <li><i class="fas fa-check"></i> Custom integration</li>
+                        <li><i class="fas fa-check"></i> Lifetime updates</li>
+                    </ul>
+                    <button class="btn btn-outline" data-plan="fulltime">Get Full Time</button>
+                </div>
             </div>
         </section>
 
-        <!-- Key Generation Section -->
-        <section class="key-section">
-            <div class="key-container">
-                <h2>Generate Your Key</h2>
-                <div id="verification-steps">
-                    <div class="step" id="step1">
-                        <button class="btn" id="start-verification">Start Verification</button>
+        <!-- Verification Section -->
+        <section class="verification-section">
+            <div class="verification-container">
+                <h2 class="section-title">Get Your Access Key</h2>
+                <div class="verification-steps">
+                    <!-- Step 1: Email Verification -->
+                    <div class="step active" id="step1">
+                        <h3>Step 1: Create Your Account</h3>
+                        <form id="signup-form" class="auth-form">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" name="password" required>
+                                    <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="strength-meter">
+                                        <div class="strength-bar"></div>
+                                    </div>
+                                    <div class="strength-text">Password Strength: <span>Weak</span></div>
+                                </div>
+                                <div class="error-message" id="password-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                                <div class="error-message" id="confirm-password-error"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </form>
                     </div>
+
+                    <!-- Step 2: Human Verification -->
                     <div class="step hidden" id="step2">
-                        <p>Are you human?</p>
-                        <button class="btn" id="human-verify">I'm Real</button>
+                        <h3>Step 2: Human Verification</h3>
+                        <p>Please complete the verification to continue.</p>
+                        <div class="verification-methods">
+                            <div class="verification-method">
+                                <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                            </div>
+                            <button class="btn btn-outline" id="skip-verification">Verify Later</button>
+                        </div>
                     </div>
+
+                    <!-- Step 3: Select Plan -->
                     <div class="step hidden" id="step3">
-                        <p>Please wait 10 seconds...</p>
-                        <div class="timer">10s</div>
+                        <h3>Step 3: Select Your Plan</h3>
+                        <p>Choose the plan that fits your needs.</p>
+                        <div class="plan-selection">
+                            <div class="plan-option" data-plan="free">
+                                <h4>Free</h4>
+                                <div class="price">$0<span>/month</span></div>
+                                <button class="btn btn-outline">Select Free</button>
+                            </div>
+                            <div class="plan-option active" data-plan="premium">
+                                <div class="popular-tag">Recommended</div>
+                                <h4>Premium</h4>
+                                <div class="price">$14.99<span>/month</span></div>
+                                <button class="btn btn-primary">Select Premium</button>
+                            </div>
+                            <div class="plan-option" data-plan="fulltime">
+                                <h4>Full Time</h4>
+                                <div class="price">$99<span>/year</span></div>
+                                <button class="btn btn-outline">Select Full Time</button>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Step 4: Payment -->
                     <div class="step hidden" id="step4">
-                        <p>Verification complete! Please wait while we generate your key...</p>
-                        <div class="loader"></div>
+                        <h3>Step 4: Payment Details</h3>
+                        <form id="payment-form" class="payment-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="card-number">Card Number</label>
+                                    <div class="input-with-icon">
+                                        <i class="far fa-credit-card"></i>
+                                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry">Expiry Date</label>
+                                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvc">CVC</label>
+                                    <input type="text" id="cvc" placeholder="123" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name on Card</label>
+                                <input type="text" id="name" placeholder="John Doe" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Complete Payment</button>
+                        </form>
                     </div>
-                </div>
-                <div id="key-display" class="hidden">
-                    <p>Your generated key:</p>
-                    <div class="key-output">Loading...</div>
-                    <button class="btn" id="copy-key">Copy Key</button>
+
+                    <!-- Step 5: Key Generation -->
+                    <div class="step hidden" id="step5">
+                        <div class="key-generation">
+                            <div class="loader-container">
+                                <div class="spinner"></div>
+                                <p>Generating your access key...</p>
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Key Display -->
+                    <div class="step hidden" id="step6">
+                        <div class="key-display">
+                            <div class="success-animation">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                            </div>
+                            <h3>Your Access Key is Ready!</h3>
+                            <p>Here's your unique access key. Keep it safe!</p>
+                            <div class="key-output">
+                                <span id="generated-key">BNDS-XXXX-XXXX-XXXX</span>
+                                <button class="btn-copy" id="copy-key" aria-label="Copy key">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="key-actions">
+                                <button class="btn btn-outline">Download Key</button>
+                                <button class="btn btn-primary">Go to Dashboard</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
+    <div class="notifications"></div>
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="script.js"></script>
 </body>
 </html>
