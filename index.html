@@ -3,19 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BandsCode - Premium Access</title>
+    <title>BandsCode - Premium Coding Tools</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Welcome Section -->
-        <section class="welcome-section">
-            <h1 class="glitch" data-text="Welcome to BandsCode">Welcome to BandsCode</h1>
-            <p class="subtitle">Unlock the power of premium coding tools</p>
-        </section>
+    <!-- Welcome Page -->
+    <div id="welcome-page" class="page active">
+        <div class="welcome-container">
+            <h1>Welcome to BandsCode</h1>
+            <p>Your gateway to premium coding tools and resources</p>
+            <button id="start-btn" class="btn btn-primary">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup-page" class="page">
+        <div class="form-container">
+            <h2>Create Your Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Plan Selection Page -->
+    <div id="plan-page" class="page">
+        <div class="plan-container">
+            <h2>Choose Your Plan</h2>
+            <div class="plans">
+                <div class="plan-card" data-plan="free">
+                    <h3>Free</h3>
+                    <div class="price">$0<span>/forever</span></div>
+                    <ul class="features">
+                        <li>Basic access</li>
+                        <li>Limited features</li>
+                        <li>Community support</li>
+                    </ul>
+                    <button class="btn btn-outline">Select Free</button>
+                </div>
+                <div class="plan-card featured" data-plan="premium">
+                    <div class="popular-tag">Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$9.99<span>/month</span></div>
+                    <ul class="features">
+                        <li>Full access to all tools</li>
+                        <li>Priority support</li>
+                        <li>24/7 availability</li>
+                    </ul>
+                    <button class="btn btn-primary">Select Premium</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Page -->
+    <div id="payment-page" class="page">
+        <div class="payment-container">
+            <h2>Complete Your Purchase</h2>
+            <form id="payment-form">
+                <div class="form-group">
+                    <label>Card Information</label>
+                    <div class="card-input">
+                        <input type="text" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="CVC" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Pay Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <div class="dashboard-container">
+            <h2>Welcome to Your Dashboard</h2>
+            <div class="key-cards">
+                <div class="key-card">
+                    <h3>Free Key</h3>
+                    <p>10-hour access</p>
+                    <button id="get-free-key" class="btn btn-outline">Get Free Key</button>
+                </div>
+                <div class="key-card premium">
+                    <h3>Premium Key</h3>
+                    <p>24-hour access</p>
+                    <button id="get-premium-key" class="btn btn-primary">Get Premium Key</button>
+                </div>
+            </div>
+            <div id="key-display" class="hidden">
+                <h3>Your Key:</h3>
+                <div class="key-output">
+                    <span id="generated-key"></span>
+                    <button id="copy-key" class="btn btn-icon"><i class="far fa-copy"></i></button>
+                </div>
+                <div id="timer" class="timer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
 
         <!-- Subscription Tiers -->
         <section class="pricing-section">
