@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BandsCode - Premium Account">
+    <title>BandsCode - Premium Account</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.4);
+        }
+        .container {
+            margin-top: 120px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .plan-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 247, 255, 0.2);
+        }
+        .plan-card.featured {
+            border: 1px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: var(--primary);
+            color: var(--darker);
+            padding: 0.3rem 2.5rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--primary);
+        }
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .plan-features li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .plan-features li:before {
+            content: '✓';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="fulltime.html">Full Time Key</a>
+            <a href="premium.html" class="active">Premium</a>
+            <a href="freekey.html">Free Key</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Premium Account</h1>
+        <p>Upgrade to Premium and unlock all features with our flexible subscription plans.</p>
+        
+        <div class="pricing-plans">
+            <div class="plan-card">
+                <h3>Monthly</h3>
+                <div class="price">$9.99<span>/month</span></div>
+                <p>Billed monthly</p>
+                <ul class="plan-features">
+                    <li>Full access to all features</li>
+                    <li>Priority support</li>
+                    <li>Regular updates</li>
+                    <li>Cancel anytime</li>
+                </ul>
+                <button class="btn btn-primary">Choose Plan</button>
+            </div>
+            
+            <div class="plan-card featured">
+                <div class="featured-badge">BEST VALUE</div>
+                <h3>Yearly</h3>
+                <div class="price">$99.99<span>/year</span></div>
+                <p>Save 17% ($8.33/month)</p>
+                <ul class="plan-features">
+                    <li>All Monthly features</li>
+                    <li>Exclusive content</li>
+                    <li>Priority feature requests</li>
+                    <li>Free updates forever</li>
+                </ul>
+                <button class="btn btn-primary">Choose Plan</button>
+            </div>
+            
+            <div class="plan-card">
+                <h3>Lifetime</h3>
+                <div class="price">$199</div>
+                <p>One-time payment</p>
+                <ul class="plan-features">
+                    <li>All Yearly features</li>
+                    <li>Lifetime access</li>
+                    <li>VIP support</li>
+                    <li>Early access to new features</li>
+                </ul>
+                <button class="btn btn-primary">Choose Plan</button>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h3>Premium Features:</h3>
+            <ul class="plan-features">
+                <li>Unlimited access to all current and future features</li>
+                <li>Priority customer support with 24-hour response time</li>
+                <li>Exclusive content and early access to new features</li>
+                <li>Advanced customization options</li>
+                <li>Ad-free experience</li>
+                <li>Regular updates and improvements</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage || 
+                   (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Add click handlers for plan buttons
+            const planButtons = document.querySelectorAll('.plan-card .btn');
+            planButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.closest('.plan-card').querySelector('h3').textContent;
+                    alert(`You've selected the ${plan} plan!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

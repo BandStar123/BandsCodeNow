@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BandsCode - Free Key Generator">
+    <title>BandsCode - Free Key</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.4);
+        }
+        .container {
+            margin-top: 120px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+        }
+        .countdown-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 1s linear;
+        }
+        .key-display {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            border: 1px dashed var(--primary);
+            position: relative;
+            display: none;
+        }
+        .key {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+        .btn-copy {
+            margin-top: 1rem;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-copy:hover {
+            background: var(--primary);
+            color: var(--darker);
+        }
+        .btn-copy.copied {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="fulltime.html">Full Time Key</a>
+            <a href="premium.html">Premium</a>
+            <a href="freekey.html" class="active">Free Key</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Free Key Generator</h1>
+        <p>Get a free key with a 5-minute cooldown between generations.</p>
+        
+        <div class="countdown-container">
+            <h3>Next Key Available In:</h3>
+            <div class="countdown-number" id="countdown">05:00</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <button id="generate-free" class="btn btn-primary" disabled>Generate Free Key</button>
+        </div>
+        
+        <div class="key-display" id="key-display">
+            <h3>Your Free Key:</h3>
+            <div class="key" id="free-key-generated"></div>
+            <button class="btn-copy" id="copy-free">
+                <i class="fas fa-copy"></i> Copy Key
+            </button>
+        </div>
+        
+        <div class="features">
+            <h3>About Free Keys:</h3>
+            <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                <li>Free keys have a 5-minute cooldown between generations</li>
+                <li>Each key is valid for 24 hours</li>
+                <li>For unlimited access, check out our <a href="premium.html" style="color: var(--primary);">Premium plans</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation active state
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage || 
+                   (currentPage === '' && linkPage === 'index.html')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Countdown timer
+            const countdownElement = document.getElementById('countdown');
+            const progressBar = document.getElementById('progress-bar');
+            const generateBtn = document.getElementById('generate-free');
+            const keyDisplay = document.getElementById('key-display');
+            const keyElement = document.getElementById('free-key-generated');
+            const copyBtn = document.getElementById('copy-free');
+            
+            const COOLDOWN_TIME = 300; // 5 minutes in seconds
+            let timeLeft = COOLDOWN_TIME;
+            let countdownInterval;
+            
+            // Check if there's a cooldown in localStorage
+            const lastGenerated = localStorage.getItem('lastKeyGenerated');
+            if (lastGenerated) {
+                const timeElapsed = Math.floor((Date.now() - parseInt(lastGenerated)) / 1000);
+                if (timeElapsed < COOLDOWN_TIME) {
+                    timeLeft = COOLDOWN_TIME - timeElapsed;
+                    startCountdown();
+                } else {
+                    generateBtn.disabled = false;
+                    countdownElement.textContent = 'Ready!';
+                }
+            } else {
+                generateBtn.disabled = false;
+                countdownElement.textContent = 'Ready!';
+            }
+            
+            function startCountdown() {
+                generateBtn.disabled = true;
+                updateCountdown();
+                
+                countdownInterval = setInterval(() => {
+                    timeLeft--;
+                    updateCountdown();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        generateBtn.disabled = false;
+                        countdownElement.textContent = 'Ready!';
+                        progressBar.style.width = '100%';
+                    }
+                }, 1000);
+            }
+            
+            function updateCountdown() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                const progress = ((COOLDOWN_TIME - timeLeft) / COOLDOWN_TIME) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Generate free key
+            generateBtn.addEventListener('click', function() {
+                // Generate a random key
+                const key = 'FREE-' + Math.random().toString(36).substring(2, 10).toUpperCase() + 
+                           '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+                
+                // Display the key
+                keyElement.textContent = key;
+                keyDisplay.style.display = 'block';
+                
+                // Start cooldown
+                timeLeft = COOLDOWN_TIME;
+                localStorage.setItem('lastKeyGenerated', Date.now().toString());
+                startCountdown();
+                
+                // Scroll to key
+                keyDisplay.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Copy key to clipboard
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(keyElement.textContent).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

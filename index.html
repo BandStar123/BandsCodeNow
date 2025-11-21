@@ -4,40 +4,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BandsCode Key Generator - Get your access keys and premium accounts">
-    <title>BandsCode - Key Generator</title>
+    <title>BandsCode - Home</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .nav-bar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.4);
+        }
+        .container {
+            margin-top: 100px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .option-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 247, 255, 0.2);
+            border-color: var(--primary);
+        }
+        .option-card i {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .option-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .option-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            min-height: 60px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 247, 255, 0.5);
+        }
+        .features {
+            margin-top: 6rem;
+            text-align: center;
+        }
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+        }
+        .feature-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        .feature-item h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Main Menu -->
-    <div id="main-menu" class="page active">
-        <div class="container">
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="fulltime.html">Full Time Key</a>
+            <a href="premium.html">Premium</a>
+            <a href="freekey.html">Free Key</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <div class="hero">
             <h1>BandsCode Key Generator</h1>
-            <div class="options">
-                <div class="option-card" id="full-time-key">
-                    <i class="fas fa-key"></i>
-                    <h2>Purchase Full Time Key</h2>
-                    <p>Get a permanent license key for unlimited access</p>
-                    <button class="btn btn-primary">Select</button>
+            <p>Unlock the full potential of BandsCode with our secure key generation system. Choose the option that best fits your needs.</p>
+        </div>
+
+        <!-- Options Grid -->
+        <div class="options">
+            <div class="option-card" id="full-time-key">
+                <i class="fas fa-key"></i>
+                <h2>Full Time Key</h2>
+                <p>Get permanent access with a one-time purchase. No subscriptions, no renewals, just unlimited access.</p>
+                <a href="fulltime.html" class="btn btn-primary">Get Full Time Key</a>
+            </div>
+            
+            <div class="option-card" id="premium-account">
+                <i class="fas fa-crown"></i>
+                <h2>Premium Account</h2>
+                <p>Unlock all premium features with a flexible subscription plan that fits your needs.</p>
+                <a href="premium.html" class="btn btn-primary">Go Premium</a>
+            </div>
+            
+            <div class="option-card" id="free-key">
+                <i class="fas fa-gift"></i>
+                <h2>Free Key</h2>
+                <p>Try our service for free with limited access. Generate a new key every 5 minutes.</p>
+                <a href="freekey.html" class="btn btn-primary">Get Free Key</a>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <h2>Why Choose BandsCode?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Reliable</h3>
+                    <p>Our keys are generated using advanced encryption to ensure maximum security and uniqueness.</p>
                 </div>
-                
-                <div class="option-card" id="premium-account">
-                    <i class="fas fa-crown"></i>
-                    <h2>Buy Premium</h2>
-                    <p>Create a premium account with email and password</p>
-                    <button class="btn btn-primary">Select</button>
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate keys instantly with our high-performance infrastructure.</p>
                 </div>
-                
-                <div class="option-card" id="free-key">
-                    <i class="fas fa-clock"></i>
-                    <h2>Get Free Key</h2>
-                    <p>Get a free 5-hour key after human verification</p>
-                    <button class="btn btn-secondary">Get Free Key</button>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is always ready to assist you with any issues.</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if ((currentPage === 'index.html' && linkPage === 'index.html') || 
+                    (currentPage === linkPage)) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Add hover effect to option cards
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('i');
+                    icon.style.animation = 'pulse 1s infinite';
+                });
+                card.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('i');
+                    icon.style.animation = 'none';
+                });
+            });
+        });
+    </script>
 
     <!-- Full Time Key Section -->
     <div id="full-time-page" class="page">
