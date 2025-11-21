@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles for background
+    initParticles();
+    
+    // Add ripple effect to buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.btn') || e.target.closest('.option') || e.target.closest('.btn-back')) {
+            createRipple(e);
+        }
+    });
     // DOM Elements
     const mainMenu = document.getElementById('main-menu');
     const fullTimePage = document.getElementById('full-time-page');
