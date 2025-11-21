@@ -4,41 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="particles-js"></div>
     <div id="container">
         <div id="step1" class="step">
+            <div class="logo">
+                <i class="fas fa-key"></i>
+            </div>
             <h2>Key Generator</h2>
-            <button onclick="nextStep(2)">Generate My Key</button>
+            <p class="subtitle">Generate your unique access key</p>
+            <button class="glow-button" onclick="nextStep(2)">
+                <span class="button-text">Generate My Key</span>
+                <span class="button-glow"></span>
+            </button>
         </div>
+
         <div id="step2" class="step hidden">
-            <p>Wait! Before we generate, <a href="https://www.youtube.com/@DevMivvy" id="ytLink" target="_blank">subscribe to this YouTube channel</a>.</p>
-            <button id="continue2" class="hidden" onclick="nextStep(3)">Continue</button>
+            <div class="task-card">
+                <div class="task-header">
+                    <i class="fab fa-youtube task-icon"></i>
+                    <h3>YouTube Subscription</h3>
+                    <div class="task-status" id="ytStatus">
+                        <i class="fas fa-lock"></i> Pending
+                    </div>
+                </div>
+                <p>Please subscribe to our YouTube channel to continue.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="ytProgress"></div>
+                    <div class="progress-text" id="ytProgressText">0% Complete</div>
+                </div>
+                <a href="https://www.youtube.com/@DevMivvy" id="ytLink" class="task-button" target="_blank">
+                    <i class="fab fa-youtube"></i> Subscribe on YouTube
+                </a>
+                <button id="continue2" class="continue-button hidden" onclick="nextStep(3)">
+                    <span class="button-text">Continue</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
+
         <div id="step3" class="step hidden">
-            <p>Wait 5 seconds...</p>
-            <button id="continue3" class="hidden" onclick="nextStep(4)">Continue</button>
+            <div class="task-card">
+                <div class="task-header">
+                    <i class="fas fa-robot task-icon"></i>
+                    <h3>Human Verification</h3>
+                </div>
+                <p>Please verify you're not a robot.</p>
+                <div class="verification-box">
+                    <input type="checkbox" id="humanCheck">
+                    <label for="humanCheck">I'm not a robot</label>
+                </div>
+                <button id="continue4" class="continue-button" onclick="verifyHuman()">
+                    <span class="button-text">Verify</span>
+                    <i class="fas fa-shield-alt"></i>
+                </button>
+            </div>
         </div>
-        <div id="step4" class="step hidden">
-            <p>Are you human?</p>
-            <input type="checkbox" id="humanCheck"> <label for="humanCheck">I'm not a robot</label><br>
-            <button id="continue4" onclick="verifyHuman()">Continue</button>
-        </div>
+
         <div id="step5" class="step hidden">
-            <p>Wait 5 seconds...</p>
-            <button id="continue5" class="hidden" onclick="nextStep(6)">Continue</button>
+            <div class="task-card">
+                <div class="task-header">
+                    <i class="fab fa-discord task-icon"></i>
+                    <h3>Join Our Community</h3>
+                    <div class="task-status" id="discordStatus">
+                        <i class="fas fa-lock"></i> Pending
+                    </div>
+                </div>
+                <p>Join our Discord server to get the latest updates and support.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="discordProgress"></div>
+                    <div class="progress-text" id="discordProgressText">0% Complete</div>
+                </div>
+                <a href="https://discord.gg/JUGQCe22jb" id="discordLink" class="task-button discord" target="_blank">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+                <button id="continue6" class="continue-button hidden" onclick="nextStep(7)">
+                    <span class="button-text">Continue</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
-        <div id="step6" class="step hidden">
-            <p>Wait! Before we give you a key, <a href="https://discord.gg/JUGQCe22jb" id="discordLink" target="_blank">join this Discord</a>.</p>
-            <button id="continue6" class="hidden" onclick="nextStep(7)">Continue</button>
-        </div>
+
         <div id="step7" class="step hidden">
-            <p>Your unique key:</p>
-            <div id="key"></div>
-            <p>Active for 5 hours.</p>
+            <div class="key-card">
+                <div class="key-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3>Your Unique Key</h3>
+                <div id="key" class="key-display">
+                    <div class="key-placeholder">Generating...</div>
+                </div>
+                <div class="key-info">
+                    <i class="fas fa-clock"></i>
+                    <span>Active for 5 hours</span>
+                </div>
+                <div class="key-actions">
+                    <button class="action-button" onclick="copyKey()">
+                        <i class="far fa-copy"></i> Copy Key
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
