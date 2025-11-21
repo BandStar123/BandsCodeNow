@@ -1,40 +1,339 @@
 document.addEventListener('DOMContentLoaded', function() {
     // DOM Elements
-    const signupForm = document.getElementById('signup-form');
-    const paymentForm = document.getElementById('payment-form');
-    const skipVerificationBtn = document.getElementById('skip-verification');
-    const copyKeyBtn = document.getElementById('copy-key');
-    const generatedKey = document.getElementById('generated-key');
-    const passwordInput = document.getElementById('password');
-    const strengthBar = document.querySelector('.strength-bar');
-    const strengthText = document.querySelector('.strength-text span');
-    const togglePassword = document.querySelector('.toggle-password');
+    const mainMenu = document.getElementById('main-menu');
+    const fullTimePage = document.getElementById('full-time-page');
+    const premiumPage = document.getElementById('premium-page');
+    const freeKeyPage = document.getElementById('free-key-page');
+    
+    // Full Time Key Elements
+    const fullTimeKeyBtn = document.querySelector('#full-time-key .btn');
+    const purchaseFtBtn = document.getElementById('purchase-ft');
+    const copyFtBtn = document.getElementById('copy-ft');
+    const fullTimeKeyDisplay = document.getElementById('full-time-key-generated');
+    
+    // Premium Account Elements
+    const premiumAccountBtn = document.querySelector('#premium-account .btn');
+    const createPremiumBtn = document.getElementById('create-premium');
+    const premiumEmail = document.getElementById('premium-email');
+    const premiumPassword = document.getElementById('premium-password');
+    const premiumConfirm = document.getElementById('premium-confirm');
+    const premiumSignup = document.getElementById('premium-signup');
+    const premiumSuccess = document.getElementById('premium-success');
+    const premiumLoginBtn = document.getElementById('premium-login');
+    
+    // Free Key Elements
+    const freeKeyBtn = document.querySelector('#free-key .btn');
+    const verifyStep = document.getElementById('step-verify');
+    const countdownStep = document.getElementById('step-countdown');
+    const keyStep = document.getElementById('step-key');
+    const countdownNumber = document.querySelector('.countdown-number');
+    const progressBar = document.querySelector('.progress');
+    const freeKeyDisplay = document.getElementById('free-key-generated');
+    const copyFreeBtn = document.getElementById('copy-free');
+    const doneFreeBtn = document.getElementById('done-free');
+    
+    // Back Buttons
+    const backButtons = document.querySelectorAll('.btn-back');
+    
+    // Notification
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.querySelector('.notification-message');
     
     // State
-    let currentStep = 1;
-    let selectedPlan = 'premium';
-    const userData = {};
+    let countdownInterval;
+    let timeLeft = 300; // 5 minutes in seconds
     
     // Initialize the app
     initApp();
     
     function initApp() {
         // Initialize event listeners
-        if (signupForm) signupForm.addEventListener('submit', handleSignup);
-        if (paymentForm) paymentForm.addEventListener('submit', handlePayment);
-        if (skipVerificationBtn) skipVerificationBtn.addEventListener('click', skipVerification);
-        if (copyKeyBtn) copyKeyBtn.addEventListener('click', copyToClipboard);
-        if (passwordInput) passwordInput.addEventListener('input', checkPasswordStrength);
-        if (togglePassword) togglePassword.addEventListener('click', togglePasswordVisibility);
+        if (fullTimeKeyBtn) fullTimeKeyBtn.addEventListener('click', () => showPage('full-time'));
+        if (premiumAccountBtn) premiumAccountBtn.addEventListener('click', () => showPage('premium'));
+        if (freeKeyBtn) freeKeyBtn.addEventListener('click', () => showPage('free-key'));
         
-        // Initialize plan selection
-        initPlanSelection();
+        // Full Time Key Events
+        if (purchaseFtBtn) purchaseFtBtn.addEventListener('click', handleFullTimePurchase);
+        if (copyFtBtn) copyFtBtn.addEventListener('click', () => copyToClipboard(fullTimeKeyDisplay, 'Full Time Key'));
         
-        // Show first step
-        showStep(1);
+        // Premium Account Events
+        if (createPremiumBtn) createPremiumBtn.addEventListener('click', handlePremiumSignup);
+        if (premiumLoginBtn) premiumLoginBtn.addEventListener('click', () => showPage('premium'));
+        if (premiumPassword) premiumPassword.addEventListener('input', checkPasswordStrength);
         
-        // Initialize animations
-        initAnimations();
+        // Free Key Events
+        if (freeKeyBtn) freeKeyBtn.addEventListener('click', startVerification);
+        if (copyFreeBtn) copyFreeBtn.addEventListener('click', () => copyToClipboard(freeKeyDisplay, 'Free Key'));
+        if (doneFreeBtn) doneFreeBtn.addEventListener('click', () => showPage('main'));
+        
+        // Back Buttons
+        backButtons.forEach(btn => {
+            btn.addEventListener('click', () => showPage('main'));
+        });
+        
+        // Toggle Password Visibility
+        const togglePasswordBtns = document.querySelectorAll('.toggle-password');
+        togglePasswordBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+    }
+    
+    // Show/Hide Pages
+    function showPage(page) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        
+        switch(page) {
+            case 'main':
+                mainMenu.classList.add('active');
+                break;
+            case 'full-time':
+                fullTimePage.classList.add('active');
+                break;
+            case 'premium':
+                premiumPage.classList.add('active');
+                premiumSignup.classList.remove('hidden');
+                premiumSuccess.classList.add('hidden');
+                break;
+            case 'free-key':
+                freeKeyPage.classList.add('active');
+                resetFreeKeyFlow();
+                break;
+        }
+    }
+    
+    // Full Time Key Functions
+    function handleFullTimePurchase(e) {
+        e.preventDefault();
+        const email = document.getElementById('email-ft').value.trim();
+        
+        if (!validateEmail(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        // In a real app, you would process the payment here
+        // For demo, we'll just generate a key
+        showLoading(purchaseFtBtn, 'Processing...');
+        
+        setTimeout(() => {
+            hideLoading(purchaseFtBtn, 'Purchase for $29.99');
+            document.querySelector('.payment-form').classList.add('hidden');
+            
+            // Generate and display key
+            const key = generateKey();
+            fullTimeKeyDisplay.textContent = key;
+            document.getElementById('key-generated-ft').classList.remove('hidden');
+            
+            showNotification('Purchase successful! Your key has been generated.', 'success');
+        }, 2000);
+    }
+    
+    // Premium Account Functions
+    function handlePremiumSignup(e) {
+        e.preventDefault();
+        
+        const email = premiumEmail.value.trim();
+        const password = premiumPassword.value;
+        const confirmPassword = premiumConfirm.value;
+        
+        // Validate inputs
+        if (!validateEmail(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        if (!validatePassword(password)) {
+            showNotification('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character', 'error');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showNotification('Passwords do not match', 'error');
+            return;
+        }
+        
+        // In a real app, you would send this to your server
+        showLoading(createPremiumBtn, 'Creating Account...');
+        
+        setTimeout(() => {
+            hideLoading(createPremiumBtn, 'Create Premium Account ($9.99/month)');
+            
+            // Show success message
+            premiumSignup.classList.add('hidden');
+            premiumSuccess.classList.remove('hidden');
+            
+            showNotification('Premium account created successfully!', 'success');
+            
+            // In a real app, you would log the user in automatically
+        }, 2000);
+    }
+    
+    // Free Key Functions
+    function startVerification() {
+        showPage('free-key');
+        
+        // Simulate verification process
+        setTimeout(() => {
+            verifyStep.classList.add('hidden');
+            countdownStep.classList.remove('hidden');
+            startCountdown();
+        }, 2000);
+    }
+    
+    function startCountdown() {
+        updateCountdown();
+        
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            updateCountdown();
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                showKey();
+            }
+        }, 1000);
+    }
+    
+    function updateCountdown() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        countdownNumber.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+        // Update progress bar
+        const progress = ((300 - timeLeft) / 300) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+    
+    function showKey() {
+        countdownStep.classList.add('hidden');
+        keyStep.classList.remove('hidden');
+        
+        // Generate and display key
+        const key = generateKey();
+        freeKeyDisplay.textContent = key;
+        
+        showNotification('Your free key has been generated!', 'success');
+    }
+    
+    function resetFreeKeyFlow() {
+        // Reset steps
+        verifyStep.classList.remove('hidden');
+        countdownStep.classList.add('hidden');
+        keyStep.classList.add('hidden');
+        
+        // Reset countdown
+        clearInterval(countdownInterval);
+        timeLeft = 300;
+        countdownNumber.textContent = '5:00';
+        progressBar.style.width = '0%';
+    }
+    
+    // Utility Functions
+    function generateKey() {
+        // Generate a random key in the format XXXX-XXXX-XXXX-XXXX
+        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let key = '';
+        
+        for (let i = 0; i < 16; i++) {
+            if (i > 0 && i % 4 === 0) key += '-';
+            key += chars[Math.floor(Math.random() * chars.length)];
+        }
+        
+        return key;
+    }
+    
+    function copyToClipboard(element, keyName) {
+        const textToCopy = element.textContent;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            showNotification(`${keyName} copied to clipboard!`, 'success');
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            showNotification('Failed to copy to clipboard', 'error');
+        });
+    }
+    
+    function checkPasswordStrength() {
+        const password = premiumPassword.value;
+        const strengthBar = document.querySelector('.strength-bar');
+        const strengthText = document.querySelector('.strength-text span');
+        
+        // Reset
+        let strength = 0;
+        let color = '#e74c3c';
+        let text = 'Weak';
+        
+        // Check password strength
+        if (password.length >= 8) strength += 1;
+        if (password.match(/[a-z]+/)) strength += 1;
+        if (password.match(/[A-Z]+/)) strength += 1;
+        if (password.match(/[0-9]+/)) strength += 1;
+        if (password.match(/[!@#$%^&*(),.?":{}|<>]+/)) strength += 1;
+        
+        // Update UI based on strength
+        switch(strength) {
+            case 0:
+            case 1:
+                color = '#e74c3c';
+                text = 'Very Weak';
+                break;
+            case 2:
+                color = '#f39c12';
+                text = 'Weak';
+                break;
+            case 3:
+                color = '#f1c40f';
+                text = 'Moderate';
+                break;
+            case 4:
+                color = '#2ecc71';
+                text = 'Strong';
+                break;
+            case 5:
+                color = '#27ae60';
+                text = 'Very Strong';
+                break;
+        }
+        
+        // Update the UI
+        strengthBar.style.width = `${(strength / 5) * 100}%`;
+        strengthBar.style.backgroundColor = color;
+        strengthText.textContent = text;
+        strengthText.style.color = color;
+    }
+    
+    function showNotification(message, type = 'info') {
+        notificationMessage.textContent = message;
+        notification.className = `notification ${type} show`;
+        
+        // Hide after 5 seconds
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
+    
+    function showLoading(button, text) {
+        button.disabled = true;
+        button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${text}`;
+    }
+    
+    function hideLoading(button, text) {
+        button.disabled = false;
+        button.textContent = text;
     }
     
     // Form validation

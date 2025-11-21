@@ -3,51 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BandsCode - Premium Coding Tools</title>
+    <title>BandsCode - Key Generator</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Welcome Page -->
-    <div id="welcome-page" class="page active">
-        <div class="welcome-container">
-            <h1>Welcome to BandsCode</h1>
-            <p>Your gateway to premium coding tools and resources</p>
-            <button id="start-btn" class="btn btn-primary">Get Started</button>
+    <!-- Main Menu -->
+    <div id="main-menu" class="page active">
+        <div class="container">
+            <h1>BandsCode Key Generator</h1>
+            <div class="options">
+                <div class="option-card" id="full-time-key">
+                    <i class="fas fa-key"></i>
+                    <h2>Purchase Full Time Key</h2>
+                    <p>Get a permanent license key for unlimited access</p>
+                    <button class="btn btn-primary">Select</button>
+                </div>
+                
+                <div class="option-card" id="premium-account">
+                    <i class="fas fa-crown"></i>
+                    <h2>Buy Premium</h2>
+                    <p>Create a premium account with email and password</p>
+                    <button class="btn btn-primary">Select</button>
+                </div>
+                
+                <div class="option-card" id="free-key">
+                    <i class="fas fa-clock"></i>
+                    <h2>Get Free Key</h2>
+                    <p>Get a free 5-hour key after human verification</p>
+                    <button class="btn btn-secondary">Get Free Key</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Signup Page -->
-    <div id="signup-page" class="page">
-        <div class="form-container">
-            <h2>Create Your Account</h2>
-            <form id="signup-form">
+    <!-- Full Time Key Section -->
+    <div id="full-time-page" class="page">
+        <div class="container">
+            <h2>Purchase Full Time Key</h2>
+            <div class="payment-form">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <label for="email-ft">Email</label>
+                    <input type="email" id="email-ft" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                    <label for="card-element">Card Details</label>
+                    <div id="card-element" class="card-element"></div>
                 </div>
-                <button type="submit" class="btn btn-primary">Continue</button>
-            </form>
+                <button id="purchase-ft" class="btn btn-primary">Purchase for $29.99</button>
+                <button class="btn btn-back">Back to Menu</button>
+            </div>
+            <div id="key-generated-ft" class="key-generated hidden">
+                <h3>Your Full Time Key</h3>
+                <div class="key-display">
+                    <span id="full-time-key-generated">XXXX-XXXX-XXXX-XXXX</span>
+                    <button id="copy-ft" class="btn-copy"><i class="far fa-copy"></i></button>
+                </div>
+                <p class="note">Please save this key in a secure place. You won't be able to see it again.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Plan Selection Page -->
-    <div id="plan-page" class="page">
-        <div class="plan-container">
-            <h2>Choose Your Plan</h2>
-            <div class="plans">
-                <div class="plan-card" data-plan="free">
-                    <h3>Free</h3>
-                    <div class="price">$0<span>/forever</span></div>
-                    <ul class="features">
-                        <li>Basic access</li>
-                        <li>Limited features</li>
-                        <li>Community support</li>
+    <!-- Premium Account Section -->
+    <div id="premium-page" class="page">
+        <div class="container">
+            <h2>Create Premium Account</h2>
+            <div id="premium-signup">
+                <div class="form-group">
+                    <label for="premium-email">Email</label>
+                    <input type="email" id="premium-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="premium-password">Create Password</label>
+                    <div class="password-input">
+                        <input type="password" id="premium-password" placeholder="Create a strong password" required>
+                        <button class="toggle-password" type="button"><i class="far fa-eye"></i></button>
+                    </div>
+                    <div class="strength-meter">
+                        <div class="strength-bar"></div>
+                        <div class="strength-text">Password strength: <span>Weak</span></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="premium-confirm">Confirm Password</label>
+                    <input type="password" id="premium-confirm" placeholder="Confirm your password" required>
+                </div>
+                <button id="create-premium" class="btn btn-primary">Create Premium Account ($9.99/month)</button>
+                <button class="btn btn-back">Back to Menu</button>
+            </div>
+            <div id="premium-success" class="hidden">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Premium Account Created!</h3>
+                <p>Your premium account has been successfully created.</p>
+                <p>You can now log in with your email and password.</p>
+                <button class="btn btn-primary" id="premium-login">Go to Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Free Key Section -->
+    <div id="free-key-page" class="page">
+        <div class="container">
+            <h2>Get Your Free 5-Hour Key</h2>
+            <div id="verification-steps">
+                <div class="step" id="step-verify">
+                    <h3>Human Verification</h3>
+                    <p>Complete the verification to get your free key</p>
+                    <div id="verification-widget">
+                        <div class="verification-loading">
+                            <div class="spinner"></div>
+                            <p>Loading verification...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step hidden" id="step-countdown">
+                    <h3>Key Generation</h3>
+                    <p>Please wait while we generate your key</p>
+                    <div class="countdown">
+                        <div class="countdown-number">5:00</div>
+                        <div class="countdown-text">minutes remaining</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                
+                <div class="step hidden" id="step-key">
+                    <h3>Your Free Key</h3>
+                    <p>This key will be valid for 5 hours</p>
+                    <div class="key-display">
+                        <span id="free-key-generated">XXXX-XXXX-XXXX-XXXX</span>
+                        <button id="copy-free" class="btn-copy"><i class="far fa-copy"></i></button>
+                    </div>
+                    <p class="note">Copy this key and use it to activate your software.</p>
+                    <button class="btn btn-primary" id="done-free">Done</button>
+                </div>
+            </div>
+            <button class="btn btn-back">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification hidden">
+        <span class="notification-message"></span>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+</body>
+</html>
                     </ul>
                     <button class="btn btn-outline">Select Free</button>
                 </div>
