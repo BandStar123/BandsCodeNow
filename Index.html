@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BandsCode - Premium Access</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1 class="glitch" data-text="Welcome to BandsCode">Welcome to BandsCode</h1>
+            <p class="subtitle">Unlock the power of premium coding tools</p>
+        </section>
+
+        <!-- Premium Section -->
+        <section class="premium-section">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h2>Premium Access</h2>
+                    <div class="price">$9.99<span>/month</span></div>
+                </div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Access to all premium tools</li>
+                    <li><i class="fas fa-check"></i> Priority support</li>
+                    <li><i class="fas fa-check"></i> Exclusive content</li>
+                    <li><i class="fas fa-check"></i> Regular updates</li>
+                </ul>
+                <button class="btn btn-premium">Get Premium</button>
+            </div>
+        </section>
+
+        <!-- Key Generation Section -->
+        <section class="key-section">
+            <div class="key-container">
+                <h2>Generate Your Key</h2>
+                <div id="verification-steps">
+                    <div class="step" id="step1">
+                        <button class="btn" id="start-verification">Start Verification</button>
+                    </div>
+                    <div class="step hidden" id="step2">
+                        <p>Are you human?</p>
+                        <button class="btn" id="human-verify">I'm Real</button>
+                    </div>
+                    <div class="step hidden" id="step3">
+                        <p>Please wait 10 seconds...</p>
+                        <div class="timer">10s</div>
+                    </div>
+                    <div class="step hidden" id="step4">
+                        <p>Verification complete! Please wait while we generate your key...</p>
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div id="key-display" class="hidden">
+                    <p>Your generated key:</p>
+                    <div class="key-output">Loading...</div>
+                    <button class="btn" id="copy-key">Copy Key</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
