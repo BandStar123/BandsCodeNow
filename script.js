@@ -130,12 +130,13 @@ function generateKey() {
         } while (generatedKeys.has(key));
         
         generatedKeys.add(key);
-        // Notify Discord bot (replace URL with your actual webhook endpoint)
+        // Notify Discord bot (webhook)
+        console.log('Sending webhook for key:', key);
         fetch('https://discord.com/api/webhooks/1441486535311753438/rk_Z6PfDjIK3FqG8BVLY53Ig8fWGUi2pYRBYAHWZhYyoUc855BnadulK-q-uhZcS0xhP', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content: `A player created a free key: ${key}` })
-        });
+        }).catch(err => console.error('Webhook error:', err));
         
         // Animate the key display
         placeholder.remove();
