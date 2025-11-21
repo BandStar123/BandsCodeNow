@@ -7,6 +7,12 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    animation: bgMove 10s linear infinite alternate;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 #container {
     background: rgba(20, 30, 40, 0.95);
@@ -15,11 +21,27 @@ body {
     box-shadow: 0 0 32px #00ffe7, 0 2px 8px rgba(0,0,0,0.2);
     width: 370px;
     border: 1px solid #00ffe7;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) both;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
 }
 h2 {
     font-family: 'Orbitron', Arial, sans-serif;
     color: #00ffe7;
-    text-shadow: 0 0 8px #00ffe7;
+    text-shadow: 0 0 16px #00ffe7, 0 0 32px #0072ff;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    animation: glowTitle 2s infinite alternate;
+}
+
+@keyframes glowTitle {
+    0% { text-shadow: 0 0 16px #00ffe7, 0 0 32px #0072ff; }
+    100% { text-shadow: 0 0 32px #00ffe7, 0 0 64px #0072ff; }
 }
 button {
     margin-top: 1rem;
@@ -29,10 +51,21 @@ button {
     color: #0f2027;
     border: none;
     border-radius: 8px;
-    box-shadow: 0 0 8px #00ffe7;
+    box-shadow: 0 0 16px #00ffe7, 0 0 8px #0072ff;
     cursor: pointer;
     font-family: 'Orbitron', Arial, sans-serif;
-    transition: background 0.3s;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) both;
+}
+button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #0072ff 0%, #00ffe7 100%);
+    box-shadow: 0 0 32px #00ffe7, 0 0 16px #0072ff;
+    transform: scale(1.07);
+}
+button:active:not(:disabled) {
+    transform: scale(0.97);
 }
 button:disabled {
     background: #222;
@@ -44,15 +77,41 @@ a {
     color: #00ffe7;
     text-decoration: underline;
     font-weight: bold;
+    position: relative;
+    transition: color 0.3s;
+}
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #00ffe7, 0 0 16px #0072ff;
 }
 .hidden { display: none; }
-.step { margin-bottom: 1.5rem; }
+.step {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeInStep 1s cubic-bezier(.77,0,.18,1) forwards;
+}
+
+@keyframes fadeInStep {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 #key {
     font-weight: bold;
     color: #00ffe7;
     font-size: 1.2rem;
-    text-shadow: 0 0 8px #00ffe7;
+    text-shadow: 0 0 16px #00ffe7, 0 0 32px #0072ff;
+    letter-spacing: 2px;
+    animation: glowKey 2s infinite alternate;
 }
+
+@keyframes glowKey {
+    0% { text-shadow: 0 0 16px #00ffe7, 0 0 32px #0072ff; }
+    100% { text-shadow: 0 0 32px #00ffe7, 0 0 64px #0072ff; }
+}
+
 label {
     font-family: 'Orbitron', Arial, sans-serif;
+    color: #00ffe7;
+    text-shadow: 0 0 8px #00ffe7;
 }
