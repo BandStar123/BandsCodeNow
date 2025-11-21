@@ -130,6 +130,12 @@ function generateKey() {
         } while (generatedKeys.has(key));
         
         generatedKeys.add(key);
+        // Notify Discord bot (replace URL with your actual webhook endpoint)
+        fetch('https://YOUR_DISCORD_BOT_ENDPOINT_HERE', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key })
+        });
         
         // Animate the key display
         placeholder.remove();
